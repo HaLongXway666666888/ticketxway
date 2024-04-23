@@ -21,7 +21,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'your_secret_key_here')
 
 DEBUG = bool(os.environ.get('DEBUG', True))
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',')
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '127.0.0.1').split(',')
 
 # Application definition
 
@@ -81,8 +81,12 @@ import os
 import dj_database_url
 
 DATABASES = {
-    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+    'default': dj_database_url.parse("postgres://aabbcc:rMCJs7TSzZuU0ZRPxRITR2dGSMOcSgZ1@dpg-coj844u3e1ms73fpldj0-a.singapore-postgres.render.com/aabbcc")
 }
+
+# DATABASES = {
+#     'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators

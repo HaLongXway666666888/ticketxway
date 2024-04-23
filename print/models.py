@@ -11,7 +11,5 @@ class TicketModel(models.Model):
     code2 = models.CharField(max_length=100)
     code3 = models.CharField(max_length=100, default='default_value')
 
-
-
     def __str__(self):
         return f"{self.ticket_name} {self.code1}"

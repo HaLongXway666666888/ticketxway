@@ -1,9 +1,5 @@
-<div class="clear-session-link" id="clear-session-wrapper" style="display: flex;flex-direction: column; justify-content: center; margin-top: 20px;margin-bottom: 20px;">
-  <a href="{% url 'clear_session' %}" class="clear-session-link" id="clear-session-wrapper">Quay lại trang Nhập dữ liệu </a>
-  <a href="{% url 'clear_session' %}" class="clear-session-link" id="clear-session-wrapper">(DÒNG CHỮ NÀY SẼ KHÔNG HIỆN RA KHI IN )</a>
-</div>
+
 {% load static %}
-{% for ticket in ticket_data %}
 <!DOCTYPE html>
 <html lang="vi">
 
@@ -15,7 +11,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Baloo+Tamma+2:wght@400..800&family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/vfs_fonts.js"></script>
 </head>
+
+
+{% for ticket in ticket_data %}
+
 
 <body>
     <div class="container">
@@ -104,18 +108,39 @@
           </div> </div>
       </div>
       <div style="height: 10px; background-color: #E6E6E6;" ></div>
-      
-  
-  
-</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 
-</html>
+</body>
 {% endfor %}
-{% comment %} <script>
-  setTimeout(function() {
-    location.reload();
-  }, 120000);
-</script> {% endcomment %}
+<button id="export-pdf-button">Xuất PDF</button>
+<script>
+  // Lắng nghe sự kiện click trên nút xuất PDF
+  document.getElementById('export-pdf-button').addEventListener('click', function() {
+    // Sử dụng thư viện jsPDF để tạo PDF mới
+    var doc = new jsPDF();
+
+    // Lấy nội dung HTML cần in
+    var content = document.documentElement.outerHTML;
+
+    // Xóa các đoạn mã JavaScript trong nội dung HTML
+    content = content.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
+
+    // Tính toán tỷ lệ thu nhỏ cho phù hợp với kích thước trang A7
+    var pageWidth = 74; // Chiều rộng của tờ A7 (đơn vị mm)
+    var pageHeight = 105; // Chiều cao của tờ A7 (đơn vị mm)
+    var scale = Math.min(pageWidth / doc.internal.pageSize.getWidth(), pageHeight / doc.internal.pageSize.getHeight());
+
+    // Tạo PDF từ nội dung HTML với tỷ lệ thu nhỏ đã tính toán
+    doc.fromHTML(content, 15, 15, {
+      'width': doc.internal.pageSize.getWidth() * scale,
+      'height': doc.internal.pageSize.getHeight() * scale
+    });
+
+    // Lưu file PDF
+    doc.save('ticket.pdf');
+  });
+</script>
+</html>
 
 <style>
   @media print {
@@ -124,5 +149,11 @@
     }
   }
 </style>
+<div class="clear-session-link" id="clear-session-wrapper" style="display: flex;flex-direction: column; justify-content: center; margin-top: 20px;margin-bottom: 20px;">
+  <a href="{% url 'clear_session' %}" class="clear-session-link" id="clear-session-wrapper">Quay lại trang Nhập dữ liệu </a>
+  <a href="{% url 'clear_session' %}" class="clear-session-link" id="clear-session-wrapper">(DÒNG CHỮ NÀY SẼ KHÔNG HIỆN RA KHI IN )</a>
+</div>
 
+  <!-- Nút xuất PDF -->
 
+  <!-- Đoạn mã JavaScript để xử lý sự kiện click -->
