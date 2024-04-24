@@ -32,7 +32,8 @@
                     <input type="checkbox" name="selected_tickets" value="{{ index }}">
                 </td>
                 <td>{{ ticket.ticket_name }}</td>
-                <td>****{{ ticket.code1|slice:"-4:" }}</td>
+                {% comment %} <td>****{{ ticket.code1|slice:"-4:" }}</td> {% endcomment %}
+                <td>{{ticket.code1}}</td>
                 <td>{{ ticket.booking_code }}</td>
                 <td>{{ ticket.ticket_price }}</td>
                 <td>{{ ticket.ticket_date }}</td>
@@ -42,7 +43,13 @@
         </tbody>
     </table>
     <div style="display: flex; justify-content: center; margin-top: 20px;">
-        <button type="submit">Chọn và Import</button>
+        <button style="background-color: #4CAF50; /* Màu nền */
+        color: white;             /* Màu chữ */
+        padding: 10px 20px;       /* Kích thước đệm */
+        border: none;             /* Không có đường viền */
+        border-radius: 5px;       /* Độ cong góc */
+        cursor: pointer;          /* Con trỏ khi di chuột */
+        font-size: 16px;          /* Kích thước chữ */" type="submit">Chọn và Import</button>
 
 </form>
 

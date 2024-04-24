@@ -11,7 +11,13 @@
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <input type="file" name="excel_file">
-        <button type="submit">Import</button>
+        <button style="background-color: #4CAF50; /* Màu nền */
+        color: white;             /* Màu chữ */
+        padding: 10px 20px;       /* Kích thước đệm */
+        border: none;             /* Không có đường viền */
+        border-radius: 5px;       /* Độ cong góc */
+        cursor: pointer;          /* Con trỏ khi di chuột */
+        font-size: 16px;          /* Kích thước chữ */" type="submit">Import</button>
     </form>
 </div>
 </body>

@@ -14,5 +14,6 @@ urlpatterns = [
     path('select/', views.import_selected_tickets, name='select_tickets'),
     path('tickets/', views.ticket_list, name='ticket_list'),
     path('clear-session/', views.clear_session, name='clear_session'),
+
 ]
 

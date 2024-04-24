@@ -1,4 +1,3 @@
-
 {% load static %}
 <!DOCTYPE html>
 <html lang="vi">
@@ -10,43 +9,39 @@
   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.debug.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Baloo+Tamma+2:wght@400..800&family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/pdfmake.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/vfs_fonts.js"></script>
 </head>
 
-
-{% for ticket in ticket_data %}
-
-
 <body>
+  <div style="page-break-inside: avoid;  " id="tickets-container">
+    {% for ticket in ticket_data %}
+
     <div class="container">
       <div class="header">
         <img class="img1" src="{% static 'image/Capture.PNG' %}" alt="Logo Sunworld">
         <img class="img2" src="{% static 'image/Capture3.PNG' %}" alt="Logo công ty">
       </div>
       <div class="main">
-        <div style="display: flex; justify-content: center;  border-bottom: 2px dashed #000000;">
+        <div style="display: flex; justify-content: center;  border-bottom: 1px dotted #000000;">
           <div class="header2">
             <div class="textheader1">Vé Sunworld Hạ Long</div>
             <div style="display:flex ;font-size: 6.5px;margin: 0 auto;">
-              <div class="textheader2">Mã đặt chỗ:</div>
+              <div style="font-weight: bold; " class="textheader2">Mã đặt chỗ:</div>
               <div style="text-transform: uppercase ;font-weight: bold;margin-left: 2px;" class="textheader2">
                 XWAY{{ ticket.booking_code }}</div>
             </div>
           </div>
         </div>
-        <div class="QR"
-          style="border-bottom: 2px dashed #000000;height:101px;display: flex;justify-content: space-between;align-items: center;">
-          <div style="display: flex; align-items: center; flex-direction: column;padding-left: 18px;">
+        <div class="QR" style="border-bottom: 1px dashed #000000;height:101px;display: flex;justify-content: space-between;align-items: center;">
+          <div style="display: flex; align-items: center; flex-direction: column;padding-left: 10px;">
             <img class="imgQR" src="data:image/png;base64,{{ ticket.qr_code }}">
-            <span style="font-size: 10px;">{{ ticket.code1 }}</span>
+            <span style="font-size: 10px;font-weight: bold;">{{ ticket.code1 }}</span>
           </div>
           <div style="padding-right: 5px;display: flex;flex-direction: column;align-items: self-end;">
-            <div
-              style=" display: flex;font-size: 12px;margin-block-start: 10px;padding-bottom: 16px;font-weight: normal;">{{ ticket.ticket_name }}</div>
+            <div style="font-weight: bold;  display: flex;font-size: 12px;margin-block-start: 10px;padding-bottom: 16px;">{{ ticket.ticket_name }}</div>
             <div style="display: flex;flex-direction: row;justify-content: space-between;   margin-bottom: 11px;">
               <div style="display: flex;flex-direction: column;margin-right: 1px;display: flex;flex-direction: column;align-items: self-end;margin-right: 12px;font-size: 12px;">
                 <div style="margin-bottom: 5px;">
@@ -68,92 +63,81 @@
           </div>
         </div>
         <div style="margin-left: 6px;margin-right: 6px;">
-  
           <div class="huong-dan-su-dung">
-            <span style=" font-size: 14px; font-weight: bolder;padding-bottom: 6px;">Hướng dẫn sử dụng</span>
+            <span style=" font-size: 14px; font-weight: bold;padding-bottom: 6px;">Hướng dẫn sử dụng</span>
             <div style="font-weight: unset;margin-top: 2px;">- Vui lòng trình mã QR tại cổng vào.</div>
-            <div style="font-weight: unset;">Giữ vé suốt hành trình để kiểm soát vé.</>
-            </div>
-            <div class="huong-dan-su-dung2">
-              <div style=" font-size: 12px; font-weight: bolder;padding-bottom: 0px;">Hạn sử dụng: (01/01 - 31/12/2024)
-              </div>
-              <div style="font-weight: unset;margin-top: 2px;">Giờ mở cửa:</div>
-              <div style="font-weight: unset;margin-top: 2px;"><span>T2-T6</span> (<span>14h00 - 20h00</span>)</div>
-              <div style="font-weight: unset;margin-top: 2px;"><span>T7-CN</span> (<span>9h00 - 20h00</span>)</div>
-            </div>
-            <div class="luu-y">
-              <div style=" font-size: 14px; font-weight: bolder;padding-bottom: 0px;">Lưu ý</div>
-              <div style="margin-left: 4px;">- Mỗi mã QR chỉ được sử dụng một lần nên hãy chú ý bảo mật mã QR của bạn.
-              </div>
-              <div style="margin-left: 4px;">- Vé đã mua không được hoàn hủy.</div><span></span>
-              <div style="font-weight: bolder;margin-left: 4px;"><span style="font-weight: normal;">-</span> Miễn phí cho
-                trẻ em có chiều cao dưới 1m.</div>
-              <div><span style="font-weight: bolder;">GHI CHÚ</span> Quý Khách vui lòng đọc và thực hiện đầy đủ nội quy,
-                quy định, hướng dẫn của Khu Vui Chơi được niêm yết tại Khu Vui Chơi hoặc trên trang/kênh bán hàng trực
-                tuyến</div>
-              <span><a href="https://dulichhalongtour.com/" style="color: blue">dulichhalongtour.com</a></span>
-            </div>
+            <div style="font-weight: unset;">Giữ vé suốt hành trình để kiểm soát vé.</div>
+          </div>
+          <div class="huong-dan-su-dung2">
+            <div style=" font-size: 12px; font-weight: bold;padding-bottom: 0px;">Hạn sử dụng: (01/01 - 31/12/2024)</div>
+            <div style="font-weight: unset;margin-top: 2px;">Giờ mở cửa:</div>
+            <div style="font-weight: unset;margin-top: 2px;"><span>T2-T6</span> (<span>14h00 - 20h00</span>)</div>
+            <div style="font-weight: unset;margin-top: 2px;"><span>T7-CN</span> (<span>9h00 - 20h00</span>)</div>
+          </div>
+          <div class="luu-y">
+            <div style=" font-size: 14px; font-weight: bold;padding-bottom: 0px;">Lưu ý</div>
+            <div style="margin-left: 4px;">- Mỗi mã QR chỉ được sử dụng một lần nên hãy chú ý bảo mật mã QR của bạn.</div>
+            <div style="margin-left: 4px;">- Vé đã mua không được hoàn hủy.</div>
+            <div style="font-weight: bold;margin-left: 4px;"><span style="font-weight: normal;">-</span> Miễn phí cho trẻ em có chiều cao dưới 1m.</div>
+            <div><span style="font-weight: bold;">GHI CHÚ</span> Quý Khách vui lòng đọc và thực hiện đầy đủ nội quy, quy định, hướng dẫn của Khu Vui Chơi được niêm yết tại Khu Vui Chơi hoặc trên trang/kênh bán hàng trực tuyến</div>
+            <span><a href="https://dulichhalongtour.com/" style="color: blue">dulichhalongtour.com</a></span>
           </div>
         </div>
         <div style="display: flex;flex-direction: column;margin-top: 10px;">
-          <div
-            style=" border-top: 2px dashed #000000;height: 30px;display: flex;padding: 8px;align-items: center;flex-direction: column;font-weight: bold;">
+          <div style=" border-top: 1px dashed #000000;height: 30px;display: flex;padding: 8px;align-items: center;flex-direction: column;font-weight: bold;">
             <span>CÔNG TY TNHH THƯƠNG MẠI VÀ DỊCH VỤ</span>
             <span>DU LỊCH XWAY HẠ LONG</span>
-
             <span>Hotline: 098.5476.888</span>
           </div>
           <div style="margin-right: 5px; display: flex; margin-left: auto; font-weight: bolder;">
             {{ forloop.counter }}/{{ ticket_data|length }}
-          </div> </div>
+          </div>
+        </div>
       </div>
-      <div style="height: 10px; background-color: #E6E6E6;" ></div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    </div>
+    <div style="height: 10px;"></div>
 
+    {% endfor %}
+  </div>
 </body>
-{% endfor %}
-<button id="export-pdf-button">Xuất PDF</button>
+  <div style="text-align: center;">
+<div style="margin-top: 20px;display: flex;flex-direction: row;">  <button style="background-color: #4CAF50; /* Màu nền */
+  color: white;             /* Màu chữ */
+  padding: 10px 20px;       /* Kích thước đệm */
+  border-radius: 5px;       /* Độ cong góc */
+  cursor: pointer;          /* Con trỏ khi di chuột */
+  font-size: 16px;          /* Kích thước chữ */"
+id="export-pdf-btn">Xuất PDF</button></div></div>
 <script>
-  // Lắng nghe sự kiện click trên nút xuất PDF
-  document.getElementById('export-pdf-button').addEventListener('click', function() {
-    // Sử dụng thư viện jsPDF để tạo PDF mới
-    var doc = new jsPDF();
-
-    // Lấy nội dung HTML cần in
-    var content = document.documentElement.outerHTML;
-
-    // Xóa các đoạn mã JavaScript trong nội dung HTML
-    content = content.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
-
-    // Tính toán tỷ lệ thu nhỏ cho phù hợp với kích thước trang A7
-    var pageWidth = 74; // Chiều rộng của tờ A7 (đơn vị mm)
-    var pageHeight = 105; // Chiều cao của tờ A7 (đơn vị mm)
-    var scale = Math.min(pageWidth / doc.internal.pageSize.getWidth(), pageHeight / doc.internal.pageSize.getHeight());
-
-    // Tạo PDF từ nội dung HTML với tỷ lệ thu nhỏ đã tính toán
-    doc.fromHTML(content, 15, 15, {
-      'width': doc.internal.pageSize.getWidth() * scale,
-      'height': doc.internal.pageSize.getHeight() * scale
+    document.getElementById("export-pdf-btn").addEventListener("click", function () {
+      var element = document.getElementById('tickets-container');
+      var opt = {
+        margin: 0,
+        filename: 'tickets.pdf',
+        image: { type: 'PNG '},
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'px', format: [300, 580], orientation: 'portrait' } // Kích thước giấy đã tính toán
+      };
+      html2pdf().set(opt).from(element).save();
     });
-
-    // Lưu file PDF
-    doc.save('ticket.pdf');
-  });
-</script>
-</html>
-
-<style>
-  @media print {
-    #clear-session-wrapper {
-      display: none;
+  </script>
+  <style>
+    @media print {
+      #clear-session-wrapper {
+        display: none;
+      }
     }
-  }
-</style>
-<div class="clear-session-link" id="clear-session-wrapper" style="display: flex;flex-direction: column; justify-content: center; margin-top: 20px;margin-bottom: 20px;">
-  <a href="{% url 'clear_session' %}" class="clear-session-link" id="clear-session-wrapper">Quay lại trang Nhập dữ liệu </a>
-  <a href="{% url 'clear_session' %}" class="clear-session-link" id="clear-session-wrapper">(DÒNG CHỮ NÀY SẼ KHÔNG HIỆN RA KHI IN )</a>
-</div>
+    .clear-session-link {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+  </style>
 
-  <!-- Nút xuất PDF -->
+  <div class="clear-session-link" id="clear-session-wrapper">
+    <a href="{% url 'clear_session' %}" class="clear-session-link">Quay lại trang Nhập dữ liệu</a>
+  </div>
 
-  <!-- Đoạn mã JavaScript để xử lý sự kiện click -->
+</html>

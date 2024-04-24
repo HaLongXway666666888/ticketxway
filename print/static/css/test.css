@@ -9,15 +9,11 @@ Reset CSS * {
     width: 300px;
     margin: auto;
     font-style: normal;
-    font-weight: bold; 
-
   }
   
   body {
     /* font-family: "Montserrat", sans-serif; */
-    /* font-family: Arial, sans-serif; */
-    font-family: "Times New Roman", Times, serif;
-
+    font-family: Arial, sans-serif;
     color: #333;
     font-size: 12px;
     width: 100%;
@@ -29,7 +25,6 @@ Reset CSS * {
     font-weight: normal;
     text-decoration: none;
     page-break-inside: avoid;
-    font-weight: bold; 
 
   }
   .img1 {
@@ -45,6 +40,7 @@ Reset CSS * {
   .container {
     box-shadow: 0px 0px 5px 1px #ccc;
     page-break-inside: avoid;
+    font-weight: bold; 
   }
   
   .header {
@@ -96,7 +92,4 @@ Reset CSS * {
     margin-top: 4px;
     font-size: 13px;
   }
-  .main{
-    font-weight: bold; 
-
-  }
+  
